@@ -37,14 +37,14 @@
 
 **Refleksjonsspørsmål:**
 *   Hva er fordelene med å lagre data i et slikt format ("comma separated values"?
-Svar:
+- Svar:
 *   Hva skjer hvis et av feltene, for eksempel et navn, inneholder et komma? Hvilke problemer skaper det for din parsing-logikk?
-Svar:
+- Svar:
 *   **Beregning av lagringsbehov:**
     *   Forelesningen viser et eksempel der en studentrad er 1024 bytes. La oss lage en forenklet modell for *vår* fil. Anta at hvert tegn (character) er 1 byte (dette er en forenkling, se UTF-8).
     *   Regn ut den omtrentlige størrelsen i bytes for én linje i din `studenter.csv`-fil (f.eks., for `101,Mickey,CS`). Ikke glem å telle med kommaene og et tegn for linjeskift.
     *   Basert på denne beregningen, hva ville den teoretiske filstørrelsen vært for **1 million** studenter? Hvor stor for **1 milliard** studenter? Uttrykk svarene i MB, GB eller TB. Sammenlign med eksempelet i forelesningen.
-    - Svar: 
+      - Svar: 
 
 ---
 
