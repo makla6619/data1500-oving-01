@@ -3,7 +3,7 @@
 # Local Testing Script for Øving 1
 # This script allows students to test their solutions locally before pushing to GitHub
 
-set -e  # Exit on error
+#set -e  # Exit on error
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 TESTDATA_DIR="${SCRIPT_DIR}/testdata"
