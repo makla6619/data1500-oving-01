@@ -75,6 +75,15 @@ S3: Hvor stor ble din brukere.idx\-fil? Sammenlign størrelsen med brukere.csv.
 S4: En indeks er ikke gratis, den tar opp ekstra lagringsplass. Hvis indeksen din var 200 MB, hva ville den kostet å lagre den på en HDD? Hva med en SSD? Bruk tallene fra forelesningen, slide *“Lagringsmedier – fra rask til billig”*. Er dette en akseptabel kostnad for den ytelsesgevinsten du får? (Hint: *“tid/plass trade-off”*)
 - Ditt svar: 
 
-
+## Vedlegg Lagringshierarki: Hastighet, kostnad og kapasitet
+Tabellen er relevant for å besvare flere av refleksjonsspørsmålene. Tabellen er kopiert fra ´https://cs145-bigdata.web.app/Section2-Systems/storage-paging.html´.
+|Storage Level 	|Access Latency 	|Throughput 	|Cost per TB 	|Typical Capacity 	|Use Case|
+|-|-|-|-|-|-|
+|CPU Registers 	|1 cycle 	|- 	|- 	|< 1KB 	|Immediate values|
+|L1/L2 Cache 	|1-10ns 	|- 	|- 	|64KB - 8MB 	|Hot instructions|
+|RAM (Buffer Pool) 	|100ns 	|100 GB/s 	|$3,500 	|16GB 	|Working set pages|
+|SSD 	|10μs 	|5 GB/s 	|$75 	|512GB 	|Active tables|
+|HDD 	|10ms 	|100 MB/s 	|$25 	|4TB 	|Cold storage|
+|Network Storage 	|1μs 	|10 GB/s 	|Variable 	|∞ 	|Distributed cache|
 
 SLUTT.
