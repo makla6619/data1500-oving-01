@@ -11,38 +11,60 @@ import java.io.IOException;
 public class FinnBruker {
     public static void main(String[] args) {
         // Velg å lage en egen funksjon finnBruker(String, String)
-		    // Både filnavn og søkeuttrykk er av typen String
-		    finnBruker(args[0], args[1]);
-	  }
+        // Både filnavn og søkeuttrykk er av typen String
+        finnBruker(args[0], args[1]);
+    }
 
     // Implemeter funksjon finnBruker(String, String) her
-	  private static void finnBruker(String filnavn, String epost) {
-    
+    private static void finnBruker(String filnavn, String epost) {
+        boolean funnet = false;
         // Bruk Instant klassen for å starte tidtaking
-		    Instant start = Instant.now();
+        Instant start = Instant.now();
     
         // Bruk BufferedReader for å åpne filen og lese fra den
-		    try(BufferedReader leser = new BufferedReader (new FileReader(filnavn))) {
-			      String linje;
+        try(BufferedReader leser = new BufferedReader (new FileReader(filnavn))) {
+            String linje;
             // Bruk while-løkke med leser.readLine() for å sekvensielt gå over alle linjene i brukerdata
-			      while ((linje = leser.readLine()) != null) {
+            while ((linje = leser.readLine()) != null) {
                 // Tips: kan bruke linje.contains metoden for å sjekke om linjen inneholder søkeuttrykket
+                // Avslutt når vi har funnet treff
+                if (linje.contains(epost)) {
+                    funnet = true;
+                    //System.out.println("Fant epost: " + epost);
+                    break; 
+                }
                 // Tips: hvis linjen inneholder søkeuttrykket bruke Instant.now() igjen for å finne slutt-tiden på søking
+                // Man kan også gjøre det utenfor try-cacth strukturen
                 // Tips: bruk Duration.between metoden for å finne forskjellg på start-tiden og slutt-tiden
                 // Skriv ut følgende to rader til stdout (System.out i Java): 
                 // Fant epost: <søkeuttrykk>
                 // Tid brukt: <N> ms.
                 // ms står for millisekunder.
                 // returner fra funksjonen
-				        // Skriv din kode her ...
+                // Skriv din kode her ...
         
-			      }    
-		    } catch (FileNotFoundException e) {
-                System.err.println("Feil: kunne ikke finne filen " + filnavn);
-                e.printStackTrace(); 
+            }    
+        } catch (FileNotFoundException e) {
+            System.err.println("Feil: kunne ikke finne filen " + filnavn);
+            e.printStackTrace(); 
         } catch (IOException e) {
-                System.err.println("Feil: IOException ");
-                e.printStackTrace(); 
+            System.err.println("Feil: IOException ");
+            e.printStackTrace(); 
         }
-	  }
+        // Tips: bruk Duration.between metoden for å finne forskjellg på start-tiden og slutt-tiden
+        // Skriv ut følgende to rader til stdout (System.out i Java): 
+        // Fant epost: <søkeuttrykk> (skrevet ut i while-løkken før break)
+        // Tid brukt: <N> ms.
+        // ms står for millisekunder.
+        // returner fra funksjonen
+        // Skriv din kode her ...
+        Instant slutt = Instant.now();
+        long tid = Duration.between(start, slutt).toMillis();
+        if (funnet) {
+            System.out.println("Fant epost: " + epost);
+        } else {
+            System.out.println("Fant ikke epost: " + epost);
+        }
+        System.out.println("Tid brukt: " + tid + " ms.");
+    }
 }
