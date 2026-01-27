@@ -8,11 +8,20 @@ import java.io.FileNotFoundException;
 // eller studentnummer. Andre felt, som representerer navn til studenten, kan være en String, for eksempel, osv.
 class Student {
     // Skriv kode her ...
+    int id;
+    String navn;
+    String program;
 
-    // Metoden erstatter en eksisterende metode toString() 
+    public Student(int id, String navn, String program) {
+        this.id = id;
+        this.navn = navn;
+        this.program = program;
+    }
+
+    // Metoden erstatter en eksisterende metode toString()  
     @Override
     public String toString() {
-        return "Student{" + .... + "}";
+        return "Student{" + "id=" + id + ", navn=\'" + navn + "\', program=\'" + program + "\'}";
     }
 
 }
@@ -22,26 +31,37 @@ class Student {
 // stdout(System.out i Java)
 public class LesStudenter {
     public static void main(String[] args) {
-        try (Scanner leser = new Scanner(new File(args[0]))) {
-            // Tips: bruk while-løkke med leser.hasNextLine() for å sekvensielt gå over alle rader i filen med studentinfo
-            while (leser.hasNext()) {
+        File fil = new File(args[0]);
+
+        try (Scanner leser = new Scanner(fil)) {
+            while (leser.hasNextLine()) {
                 // Tips: bruk leser.nextLine().split(",") for å splitte opp linje (post) i felt (leses inn i en String[])
                 // Tips: sjekk at lengden til post er 3 (du trenger ikke å implementer else) 
                 // Tips: ta inn det første feltet som int (forutsatt at datafeltet i klassen Student er int)
                 // Skriv kode her ...
                 // Tips: alloker Student-objekt for hver linje i filen med studentinfo (fullfør initialisering av objektet Student)
-                Student s = new Student(...);
-                // Tips: Skriv ut dataene med den overskrevede toString() metoden i klassen Student.
-                System.out.println(s);
+                String linje = leser.nextLine();
+                String[] felt = linje.split(",");
+
+                if (felt.length == 3) {
+                    int id = Integer.parseInt(felt[0].trim());
+                    String navn = felt[1].trim();
+                    String program = felt[2].trim();
+                    // Tips: alloker Student-objekt for hver linje i filen med studentinfo (fullfør initialisering av objektet Student)
+                    Student s = new Student(id, navn, program);
+                    // Tips: Skriv ut dataene med den overskrevede toString() metoden i klassen Student.
+                    System.out.println(s);
+                }
             }
-        } catch (FileNotFoundException fnfe) {
-            fnfe.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.err.println("Feil: Kunne ikke finne filen " + fil.getPath());
+            e.printStackTrace();
         }
     }
 }
 
 /** Output skal være: 
-Student{id=101, navn='Mickey', program='CS'}
+{id=1Student01, navn='Mickey', program='CS'}
 Student{id=102, navn='Daffy', program='EE'}
 Student{id=103, navn='Donald', program='CS'}
 Student{id=104, navn='Minnie', program='PSY'}
