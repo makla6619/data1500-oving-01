@@ -7,33 +7,41 @@ import java.util.Map;
 
 public class HashJoin {
 
-	  public static void main(String[] args) {
-		    // Last inn oppslagstabeller for studenter og kurs i minne vha. Java interface Map (klasse HashMap)
-        // Mekanismen er implementert i egen funksjon 
-        // lastInnMap(filnavn, feltposisjon for nøkkel, feltposisjon for verdi, om nøkkel er et tall)
+	public static void main(String[] args) {
+			// Last inn oppslagstabeller for studenter og kurs i minne vha. Java interface Map (klasse HashMap)
+        	// Mekanismen er implementert i egen funksjon 
+        	// lastInnMap(filnavn, feltposisjon for nøkkel, feltposisjon for verdi, om nøkkel er et tall)
 		    Map<Object, String> studenter = lastInnMap(args[0], 0, 1, true); // ligger i RAM og har raskt oppslag og innsetting
 		    Map<Object, String> kurs = lastInnMap(args[1], 0, 1, false); // ligger i RAM og har raskt oppslag og innsetting
+		    //System.out.println("Studenter og kurs lastet inn i HashMaps.");
         
 		    // Iterer gjennom koblingsfilen (paameldinger) og finn navn til student og navn på kurs
 		    try (BufferedReader leser = new BufferedReader(new FileReader(args[2]))) {
-			      String linje;
-			      while ((linje = leser.readLine()) != null) {
-				        String[] felt = linje.split(",");
-				        if (felt.length == 2) {
-                    // Tips: "kast" studentId fra paameldinger til int
-                    // Tips: hent inn kursnavn fra kurs som String
-                    // Tips: bruke HashMap objekter for å finne studentnavn og kursnavn
-                    // Tips: sjekk at studentnavn og kursnavn ikke er null
-                    // Tips: skriv ut post (linje) til stdout (System.out i Java) på følgende format
-                    // <studentnavn> er påmeldt <kursnavn>
-					          // Skriv din kode her ...
+			    String linje;
+			    while ((linje = leser.readLine()) != null) {
+				    String[] felt = linje.split(",");
+				    if (felt.length == 2) {
+                    	// Tips: "kast" studentId fra paameldinger til int
+				    	int studentId = Integer.parseInt(felt[0].trim());
+				    	String kursId = felt[1].trim();
+                    	// Tips: hent inn kursnavn (feil! kursId) fra kurs som String
+                    	// Tips: bruke HashMap objekter for å finne studentnavn og kursnavn
+                    	String studentNavn = studenter.get(studentId);
+                    	String kursNavn = kurs.get(kursId);
+                    	// Tips: sjekk at studentnavn og kursnavn ikke er null
+                    	// Tips: skriv ut post (linje) til stdout (System.out i Java) på følgende format
+                    	// <studentnavn> er påmeldt <kursnavn>
+						// Skriv din kode her ...
+						if (studentNavn != null && kursNavn != null) {
+                        	System.out.println(studentNavn + " er påmeldt " + kursNavn);
+                    	}
                   
-				        }
-			      } 
+				    }
+			    } 
 		    } catch (IOException e) {
 			      e.printStackTrace();
 		    }
-	  }
+	}
   
     // Funksjonen lastInnMap 
     // Argumenter: 
@@ -43,7 +51,7 @@ public class HashJoin {
     // - parseKeyAsInt (om nokkelIndeks skal tolkes som et tall, int i dette tilfelle)
     // studentdata: 101,Mickey,CS (nokkelIndeks er 101 og verdiIndeks er "Mickey")
     // kursdata: DATA1500,Intro to Databases (nokkelIndeks er "DATA1500" og verdiIndeks er "Intro to Databases"
-	  private static Map<Object, String> lastInnMap(String filnavn, int nokkelIndeks, int verdiIndeks, boolean parseKeyAsInt) {
+	private static Map<Object, String> lastInnMap(String filnavn, int nokkelIndeks, int verdiIndeks, boolean parseKeyAsInt) {
 		    Map<Object, String> map = new HashMap<>();
 		    try (BufferedReader leser = new BufferedReader(new FileReader(filnavn))) {
 			      String linje;
@@ -65,4 +73,4 @@ public class HashJoin {
 		    return map;
 	  }
 
-} 
+}
