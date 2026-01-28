@@ -31,9 +31,10 @@ public class SokMedIndeks {
 			cnfe.printStackTrace();
 		}
 
-		
+		Instant start = Instant.now();
 		// O(1) oppslag i indeksen
 		Long posisjon = null;
+
 		if (indeks != null) {
 			posisjon = indeks.get(epostSok);
 		}
@@ -54,7 +55,10 @@ public class SokMedIndeks {
 		// Skriv ut en linje til stdout (System.out i Java) på følgende format:
         // Søket med indeks tok N nanos (M ms).
         // Hvor N er tallet i nanosekunder og M er tallet i millisekunder.
-		System.out.println("...");
+		//System.out.println("...");
+		Instant slutt = Instant.now();
+		Duration dur = Duration.between(start, slutt);
+        System.out.println("Søket med indeks tok " + dur.toNanos() + " nanos (" + dur.toMillis()+ " ms).");
 
 	}
 }
